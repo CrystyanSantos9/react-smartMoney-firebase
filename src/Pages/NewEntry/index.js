@@ -18,10 +18,8 @@ const NewEntry = ({navigation}) => {
 
   const isValid = () => {
     if (parseFloat(amount) !== 0) {
-      // console.log(`é válido ${amount}`);
       return true;
     }
-    // console.log(`Não é válido ${amount}`);
     return false;
   };
 

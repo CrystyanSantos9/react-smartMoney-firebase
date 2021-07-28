@@ -15,7 +15,6 @@ export const getEntries = async () => {
 export const saveEntry = async (value, entry = {}) => {
   const realm = await getRealm();
   let data = {};
-  // const {amount} = value;
 
   try {
     realm.write(() => {
@@ -27,13 +26,12 @@ export const saveEntry = async (value, entry = {}) => {
       };
       realm.create('Entry', data, true);
     });
-
-    // console.log('saveEntry :: data: ', JSON.stringify(data));
-    return data;
   } catch (error) {
-    // console.error('saveEntry :: error on save object: ', JSON.stringify(data));
-    Alert.alert(`Erro ao salvar os dados de lançamento ${data.amount}`);
+    console.error('saveEntry :: error on save object: ', JSON.stringify(data));
+    Alert.alert('Erro ao salvar os dados de lançamento.');
   }
+
+  return data;
 };
 
 export const deleteEntry = async entry => {
