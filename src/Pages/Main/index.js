@@ -15,6 +15,7 @@ const Main = ({navigation}) => {
     {key:  '4',  description:'Lazer', amount: '$1200'}
   ];
 
+  
   const currentBalance = '2.088,35';
 
   return (
