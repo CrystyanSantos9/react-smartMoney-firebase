@@ -13,7 +13,9 @@ const Main = ({navigation}) => {
     {key:  '2',  description:'Saude', amount: '$300'},
     {key:  '3',  description:'Educação', amount: '$493'},
     {key:  '4',  description:'Lazer', amount: '$1200'}
-  ]
+  ];
+
+  // Versão MAIS ATUAL - BRANCH mais_atual
 
   const currentBalance = '2.088,35';
 
