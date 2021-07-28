@@ -15,8 +15,6 @@ const Main = ({navigation}) => {
     {key:  '4',  description:'Lazer', amount: '$1200'}
   ];
 
-  // Versão MAIS ATUAL - BRANCH mais_atual
-
   const currentBalance = '2.088,35';
 
   return (

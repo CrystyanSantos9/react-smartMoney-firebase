@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, TextInput, Button, Alert} from 'react-native';
+import {StyleSheet, Text, View, TextInput, Button} from 'react-native';
 import BalanceLabel from '../../components/BalanceLabel';
 
 import {saveEntry} from '../../services/Entries';
@@ -18,8 +18,10 @@ const NewEntry = ({navigation}) => {
 
   const isValid = () => {
     if (parseFloat(amount) !== 0) {
+      // console.log(`é válido ${amount}`);
       return true;
     }
+    // console.log(`Não é válido ${amount}`);
     return false;
   };
 
