@@ -6,6 +6,8 @@ import BalancePanel from '../../components/BalancePanel';
 import EntryList from '../../components/EntryList';
 import EntrySummary from '../../components/EntrySummary';
 
+import Colors from '../../styles/Color';
+
 const Main = ({navigation}) => {
 
   const  entriesGrouped = [
@@ -33,7 +35,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    backgroundColor: "#fff",
+    backgroundColor: Colors.background,
   },
   label: {
     fontSize: 20,
