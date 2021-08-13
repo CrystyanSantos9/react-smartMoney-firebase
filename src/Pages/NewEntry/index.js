@@ -1,23 +1,30 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, TextInput, Button} from 'react-native';
 import BalanceLabel from '../../components/BalanceLabel';
+import NewEntryInput from './NewEntryInput';
+import NewEntryCategoryPicker from './NewEntryCategoryPicker';
+import NewEntryDatePicker from './NewEntryDatePicker';
 
 import {saveEntry} from '../../services/Entries';
 import {deleteEntry} from '../../services/Entries';
 
-const NewEntry = ({navigation}) => {
-  const currentBalance = '2.535,66';
+import Colors from '../../styles/Color';
 
+const NewEntry = ({navigation}) => {
   const entry = navigation.getParam('entry', {
     id: null,
     amount: '0.00',
+    category: {id: null, name: 'Selecione'},
     entryAt: new Date(),
   });
 
+  const [debit, setDebit] = useState(entry.amount <= 0);
   const [amount, setAmount] = useState(`${entry.amount}`);
+  const [category, setCategory] = useState(entry.category);
+  const [entryAt, setEntryAt] = useState(entry.entryAt);
 
   const isValid = () => {
-    if (parseFloat(amount) !== 0) {
+    if (parseFloat(amount) !== 0 && category.name !== 'Selecione') {
       return true;
     }
     return false;
@@ -26,6 +33,8 @@ const NewEntry = ({navigation}) => {
   const onSave = () => {
     const data = {
       amount: parseFloat(amount),
+      category: category,
+      entryAt: entryAt,
     };
 
     console.log('NewEntry :: save ', data);
@@ -44,18 +53,23 @@ const NewEntry = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <BalanceLabel currentBalance={currentBalance} />
-
+      <BalanceLabel />
       {/* New Entry Form - Primeiro design */}
-      <View>
-        <TextInput
-          style={styles.input}
-          onChangeText={text => setAmount(text)}
+      <View style={styles.formContainer}>
+        <NewEntryInput
           value={amount}
+          onChangeDebit={setDebit}
+          onChangeValue={setAmount}
         />
-        <TextInput style={styles.input} />
-        <Button title="GPS" />
-        <Button title="Câmera" />
+        <NewEntryCategoryPicker
+          debit={debit}
+          category={category}
+          onChangeCategory={setCategory}
+        />
+
+        <View style={styles.formActionContainer}>
+          <NewEntryDatePicker value={entryAt} onChange={setEntryAt} />
+        </View>
       </View>
 
       <View>
@@ -76,18 +90,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.background,
   },
-  label: {
-    fontSize: 12,
+  formContainer: {
+    flex: 1,
+    paddingVertical: 20,
   },
-  value: {
-    fontSize: 18,
-  },
-  input: {
-    borderColor: '#000',
-    borderWidth: 1,
-    color: '#000',
+  formActionContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginVertical: 10,
   },
 });
 

@@ -1,24 +1,57 @@
 import React from 'react';
-import {View, Text, StyleSheet, Button} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+
+import LinearGradient from 'react-native-linear-gradient';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import BalancePanelLabel from './BalancePanelLabel';
 import BalancePanelChart from './BalancePanelChart';
 
-const BalancePanel = ({navigation, currentBalance}) => {
+import Colors from '../../styles/Color';
+
+const BalancePanel = ({onNewEntryPress}) => {
+  const currentBalance = '2.088,35';
 
   return (
     <View style={styles.container}>
-         <BalancePanelLabel currentBalance={currentBalance} />
+      <LinearGradient
+        colors={[Colors.violet, Colors.blue]}
+        style={styles.panel}>
+        <BalancePanelLabel currentBalance={currentBalance} />
         <BalancePanelChart />
-        {/* <Button title="Adicionar"></Button> */}
+      </LinearGradient>
+      <TouchableOpacity style={styles.button} onPress={onNewEntryPress}>
+        <Icon name="add" size={30} color={Colors.white} />
+      </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  }
+  container: {},
+  panel: {
+    // flex: 1,
+    paddingVertical: 10,
+  },
+  button: {
+    backgroundColor: Colors.green,
+    alignSelf: 'flex-end',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 150,
+    width: 50,
+    height: 50,
+    shadowColor: Colors.black,
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.27,
+    shadowRadius: 4.65,
+    elevation: 6,
+    marginTop: -25,
+    marginRight: 10,
+  },
 });
 
 export default BalancePanel;

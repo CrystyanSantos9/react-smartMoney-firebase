@@ -1,22 +1,20 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
 
 import EntrySummaryChart from './EntrySummaryChart';
 import EntrySummaryList from './EntrySummaryList';
+import Container from '../Core/Container';
 
-const EntrySummary = ({entriesGrouped}) => {
+const EntrySummary = ({navigation, onPressActionButton}) => {
   return (
-    <View style={styles.container}>
+    <Container
+      title="Categorias"
+      actionLabelText="Últimos 7 dias"
+      actionButtonText="Ver mais"
+      onPressActionButton={onPressActionButton}>
       <EntrySummaryChart />
-      <EntrySummaryList entriesGrouped={entriesGrouped} />
-    </View>
+      <EntrySummaryList />
+    </Container>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 export default EntrySummary;

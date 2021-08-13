@@ -22,7 +22,9 @@ export const saveEntry = async (value, entry = {}) => {
         id: value.id || entry.id || getUUID(),
         amount: value.amount || entry.amount,
         entryAt: value.entryAt || entry.entryAt,
+        description: value.category.name,
         isInit: false,
+        category: value.category || entry.category,
       };
       realm.create('Entry', data, true);
     });

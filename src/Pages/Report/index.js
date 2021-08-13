@@ -1,11 +1,22 @@
 import React from 'react';
-import {StyleSheet, Text, View, TextInput, Button, Picker} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Button,
+  ColorPropType,
+} from 'react-native';
+
+import {Picker} from '@react-native-picker/picker';
 
 import EntryLabel from '../../components/BalanceLabel';
 import EntrySummary from '../../components/EntrySummary';
 import EntryList from '../../components/EntryList';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const Report = () => {
+const Report = ({navigation}) => {
   const entriesGrouped = [
     {key: '1', description: 'Alimentação', amount: '$201'},
     {key: '2', description: 'Saude', amount: '$300'},
@@ -26,26 +37,44 @@ const Report = () => {
     <View style={styles.container}>
       <EntryLabel currentBalance={currentBalance}> </EntryLabel>
       <View>
-        <Picker>
-          <Picker.Item label="Todas Categorias" />
-        </Picker>
-        <Picker>
-          <Picker.Item label="Últimos 7 dias" />
-        </Picker>
+        <View style={styles.containerPicker}>
+          <Picker style={styles.label}>
+            <Picker.Item label="Todas Categorias" />
+          </Picker>
+          <Icon name="arrow-drop-down" size={30} />
+        </View>
+        <View style={styles.containerPicker}>
+          <Picker style={styles.label}>
+            <Picker.Item label="Últimos 7 dias" />
+          </Picker>
+          <Icon name="arrow-drop-down" size={30} />
+        </View>
       </View>
       <EntrySummary entriesGrouped={entriesGrouped} />
       <EntryList entries={entries} />
+      <Button title="Excluir" onPress={() => navigation.goBack()} />
+      <Button title="Cancelar" onPress={() => navigation.navigate('Main')} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: Colors.white,
     flex: 1,
     padding: 10,
   },
+  containerPicker: {
+    flexDirection: 'row',
+    borderColor: '#000',
+    borderWidth: 1,
+    alignItems: 'center',
+    marginTop: 10,
+  },
   label: {
     fontSize: 12,
+    color: '#000',
+    flex: 1,
   },
   value: {
     fontSize: 18,
@@ -53,6 +82,7 @@ const styles = StyleSheet.create({
   input: {
     borderColor: '#000',
     borderWidth: 1,
+    color: '#000',
   },
 });
 
