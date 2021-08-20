@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
     borderRadius: 150,
     alignItems: 'center',
     justifyContent: 'center',
+    margin: 5,
   },
 });
 

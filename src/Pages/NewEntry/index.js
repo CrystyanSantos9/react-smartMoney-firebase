@@ -4,6 +4,11 @@ import BalanceLabel from '../../components/BalanceLabel';
 import NewEntryInput from './NewEntryInput';
 import NewEntryCategoryPicker from './NewEntryCategoryPicker';
 import NewEntryDatePicker from './NewEntryDatePicker';
+import NewEntryDeleteAction from './NewEntryDeleteAction';
+import ActionFooter, {
+  ActionPrimaryButton,
+  ActionSecondaryButton,
+} from '../../components/Core/ActionFooter';
 
 import {saveEntry} from '../../services/Entries';
 import {deleteEntry} from '../../services/Entries';
@@ -69,19 +74,19 @@ const NewEntry = ({navigation}) => {
 
         <View style={styles.formActionContainer}>
           <NewEntryDatePicker value={entryAt} onChange={setEntryAt} />
+          <NewEntryDeleteAction entry={entry} onOkPress={onRemove} />
         </View>
       </View>
 
-      <View>
-        <Button
-          title="Adicionar"
+      <ActionFooter>
+        <ActionPrimaryButton
+          title={entry.id ? 'Salvar' : 'Adicionar'}
           onPress={() => {
             isValid() && onSave();
           }}
         />
-        <Button title="Excluir" onPress={onRemove} />
-        <Button title="Cancelar" onPress={() => navigation.goBack()} />
-      </View>
+        <ActionSecondaryButton title="Cancelar" onPress={onClose} />
+      </ActionFooter>
     </View>
   );
 };

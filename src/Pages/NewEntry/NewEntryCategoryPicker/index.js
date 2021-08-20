@@ -1,38 +1,12 @@
-import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Modal,
-  StyleSheet,
-  FlatList,
-} from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
-import {
-  getDebitCategories,
-  getCreditCategories,
-} from '../../../services/Categories';
+import Categorymodal from '../../../components/CategoryModal';
 
 import Colors from '../../../styles/Color';
 
 export const NewEntryCategoryPicker = ({debit, category, onChangeCategory}) => {
   const [modaVisible, setModalVisible] = useState(false);
-  const [debitCategories, setDebitCategories] = useState([]);
-  const [creditCategories, setCreditCategories] = useState([]);
-
-  useEffect(() => {
-    async function loadCategories() {
-      const dataDebit = await getDebitCategories();
-      const dataCredit = await getCreditCategories();
-
-      setDebitCategories(dataDebit);
-      setCreditCategories(dataCredit);
-    }
-
-    loadCategories();
-
-    console.log('NewEntryCategoryPicker :: useEffect');
-  }, []);
 
   const onCategoryPress = item => {
     onChangeCategory(item);
@@ -50,33 +24,12 @@ export const NewEntryCategoryPicker = ({debit, category, onChangeCategory}) => {
         onPress={() => setModalVisible(true)}>
         <Text style={styles.pickerButtonText}>{category.name}</Text>
       </TouchableOpacity>
-
-      <Modal animationType="slide" transparent={false} visible={modaVisible}>
-        <View style={styles.modal}>
-          <FlatList
-            data={debit ? debitCategories : creditCategories}
-            keyExtractor={item => item.id}
-            renderItem={({item}) => (
-              <TouchableOpacity
-                style={styles.modalItem}
-                onPress={() => {
-                  onCategoryPress(item);
-                }}>
-                <Text style={[styles.modalItemText, {color: item.color}]}>
-                  {item.name}
-                </Text>
-              </TouchableOpacity>
-            )}
-          />
-          <TouchableOpacity
-            style={styles.closeButton}
-            onPress={() => {
-              setModalVisible(false);
-            }}>
-            <Text style={styles.closeButtonText}>Fechar</Text>
-          </TouchableOpacity>
-        </View>
-      </Modal>
+      <Categorymodal
+        categoryType={debit ? 'debit' : 'credit'}
+        isVisible={modaVisible}
+        onConfirm={onCategoryPress}
+        onCancel={onClosePress}
+      />
     </View>
   );
 };
