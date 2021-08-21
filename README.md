@@ -1,5 +1,7 @@
 ## <span style="color:green;"> App React-Native SmartMoney </span>
 
+<span style="color: green"> Some green text </span>
+
 O App SmartMoney é um aplicativo criado para auxiliar no controle de suas econômias. Com ele é possível armazenar todos os gastos realizados, de forma categorizada e com relatórios gráficos para facilitar a sua análise. Além disso é possível armazenar o registro dos cupons de venda utilizando sua câmera e também salvar a localização de onde o consumo ocorreu. Uma ótima ferramenta para fazer aquela econômia em tempos tão difíceis. 
 
 Strong emphasis, aka bold, with **asterisks** or __underscores__.
