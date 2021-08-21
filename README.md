@@ -25,6 +25,7 @@ Strikethrough uses two tildes. ~~Scratch this.~~
 ### Utilização 
 
 ```
+clonar esse repositório
 cd c:\react-native\smartMoney
 c:\react-native\smartMoney: react-native run-android
 ```
