@@ -10,8 +10,7 @@ import ActionFooter, {
   ActionSecondaryButton,
 } from '../../components/Core/ActionFooter';
 
-import {saveEntry} from '../../services/Entries';
-import {deleteEntry} from '../../services/Entries';
+import useEntries from '../../hooks/useEntries';
 
 import Colors from '../../styles/Color';
 
@@ -22,6 +21,8 @@ const NewEntry = ({navigation}) => {
     category: {id: null, name: 'Selecione'},
     entryAt: new Date(),
   });
+
+  const [, saveEntry, deleteEntry] = useEntries();
 
   const [debit, setDebit] = useState(entry.amount <= 0);
   const [amount, setAmount] = useState(`${entry.amount}`);

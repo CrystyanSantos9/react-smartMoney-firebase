@@ -12,7 +12,7 @@ import {
 import ActionFooter, {ActionPrimaryButton} from '../Core/ActionFooter';
 import Colors from '../../styles/Color';
 
-import useCategories from '../hooks/useCategories';
+import useCategories from '../../hooks/useCategories';
 
 const Categorymodal = ({categoryType, isVisible, onConfirm, onCancel}) => {
   const [debitCategories, creditCategories, allCategories] = useCategories();

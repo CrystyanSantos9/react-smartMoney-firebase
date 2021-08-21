@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 
-import {getBalance} from '../../services/Balance';
+import {getBalance} from '../services/Balance';
 
 const useBalance = () => {
   const [balance, setBalance] = useState();

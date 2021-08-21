@@ -4,7 +4,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Colors from '../../styles/Color';
 
-import useBalance from '../hooks/useBalance';
+import useBalance from '../../hooks/useBalance';
 
 const BalanceLabel = () => {
   const [currentBalance] = useBalance();

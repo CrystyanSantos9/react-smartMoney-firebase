@@ -5,7 +5,7 @@ import {
   getInitCategories,
   getDebitCategories,
   getCreditCategories,
-} from '../../services/Categories';
+} from '../services/Categories';
 
 const useCategories = () => {
   const [debitCategories, setDebitCategories] = useState([]);

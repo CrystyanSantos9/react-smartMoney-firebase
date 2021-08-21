@@ -9,7 +9,7 @@ import BalancePanelChart from './BalancePanelChart';
 
 import Colors from '../../styles/Color';
 
-import useBalance from '../hooks/useBalance';
+import useBalance from '../../hooks/useBalance';
 
 const BalancePanel = ({onNewEntryPress}) => {
   const [currentBalance] = useBalance();
