@@ -15,6 +15,12 @@ O App SmartMoney é um aplicativo criado para auxiliar no controle de suas econo
 * Para trabalhar com datas : [Moment](https://momentjs.com) 
 * Criação randômica de Identificadores : [UUID](https://www.npmjs.com/package/uuid)
 * Banco de dados : [Realm](https://docs.mongodb.com/realm/sdk/) 
+* Utilizar Gráficos : [react-native-svg-charts](https://github.com/JesperLekland/react-native-svg-charts)
+* Manipulação de arrays: [Lodash](https://lodash.com)
+
+### Aplicações de Apoio <img src="flag_black_24dp.svg" />
+
+* Usado para formatar a apresentação dos dados em JSON : [JSON Formatter & Validator](https://jsonformatter.curiousconcept.com/#)
 
 ### Utilização 
 

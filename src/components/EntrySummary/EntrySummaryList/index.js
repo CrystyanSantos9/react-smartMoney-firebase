@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, FlatList, Text} from 'react-native';
 
-const EntrySummaryList = () => {
+const EntrySummaryList = ({data}) => {
   const entriesGrouped = [
     {key: '1', description: 'Alimentação', amount: '$201'},
     {key: '2', description: 'Saude', amount: '$300'},
