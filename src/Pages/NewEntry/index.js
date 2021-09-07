@@ -5,6 +5,7 @@ import NewEntryInput from './NewEntryInput';
 import NewEntryCategoryPicker from './NewEntryCategoryPicker';
 import NewEntryDatePicker from './NewEntryDatePicker';
 import NewEntryDeleteAction from './NewEntryDeleteAction';
+import NewEntryAddressPicker from './NewEntryAddressPicker';
 import ActionFooter, {
   ActionPrimaryButton,
   ActionSecondaryButton,
@@ -75,6 +76,7 @@ const NewEntry = ({navigation}) => {
 
         <View style={styles.formActionContainer}>
           <NewEntryDatePicker value={entryAt} onChange={setEntryAt} />
+          <NewEntryAddressPicker />
           <NewEntryDeleteAction entry={entry} onOkPress={onRemove} />
         </View>
       </View>

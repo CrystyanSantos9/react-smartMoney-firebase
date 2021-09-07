@@ -1,31 +1,22 @@
 import React from 'react';
 import {View, StyleSheet, FlatList, Text} from 'react-native';
 
-const EntrySummaryList = ({data}) => {
-  const entriesGrouped = [
-    {key: '1', description: 'Alimentação', amount: '$201'},
-    {key: '2', description: 'Saude', amount: '$300'},
-    {key: '3', description: 'Educação', amount: '$493'},
-    {key: '4', description: 'Lazer', amount: '$1200'},
-  ];
+import EntrySummaryListItem from './EntrySummaryListItem';
 
+const EntrySummaryList = ({data}) => {
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={entriesGrouped}
-        renderItem={({item}) => (
-          <Text>
-            - {item.description} :{item.amount}
-          </Text>
-        )}
-      />
-    </View>
+    <FlatList
+      style={styles.container}
+      data={data}
+      keyExtractor={item => item.category.id}
+      renderItem={({item}) => <EntrySummaryListItem entry={item} />}
+    />
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
+    flex: 1,
   },
 });
 
