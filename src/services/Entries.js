@@ -35,6 +35,9 @@ export const saveEntry = async (value, entry = {}) => {
       data = {
         id: value.id || entry.id || getUUID(),
         amount: value.amount || entry.amount,
+        address: value.address || entry.address,
+        latitude: value.latitude || entry.latitude,
+        longitude: value.longitude || entry.longitude,
         entryAt: value.entryAt || entry.entryAt,
         description: value.category.name,
         isInit: false,

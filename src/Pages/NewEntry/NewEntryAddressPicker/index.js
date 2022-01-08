@@ -1,6 +1,5 @@
 import React from 'react';
 import {View, TouchableOpacity, StyleSheet, Alert} from 'react-native';
-
 import Geocoder from 'react-native-geocoding';
 
 import Geolocation from '@react-native-community/geolocation';
@@ -10,7 +9,7 @@ import Colors from '../../../styles/Color';
 
 const NewEntryAddressPicker = ({address, onChange}) => {
   const getLocation = (latitude, longitude) => {
-    Geocoder.init();
+    Geocoder.init('AIzaSyAzQNH9IO-MScUjJggoJnGsTZHFGGj7g-g');
 
     //fazendo a geolocalização reversa
     //será realizada uma requisição no formato de promise
@@ -18,7 +17,26 @@ const NewEntryAddressPicker = ({address, onChange}) => {
       .then(json => {
         //recuperando endereço formatado
         const formattedAddress = json.results[0].formatted_address;
-        Alert.alert('Endereço formatado', formattedAddress);
+        Alert.alert('Localização', formattedAddress, [
+          //incluindo escolhas no alert
+          //Botão cancelar
+          {
+            text: 'Cancelar',
+            onPress: () => {},
+            style: 'cancel',
+          },
+          //botão confirmar --> chamando função onChange
+          {
+            text: 'Confirmar',
+            onPress: () => {
+              onChange({
+                latitude: latitude,
+                longitude: longitude,
+                address: formattedAddress,
+              });
+            },
+          },
+        ]);
       })
       .catch(error => {
         console.error(
@@ -56,12 +74,29 @@ const NewEntryAddressPicker = ({address, onChange}) => {
   };
 
   const onButtonPres = () => {
-    getPosition();
+    //o Address servirá para realizar a nossa edição
+    if (address) {
+      Alert.alert('Localização', address, [
+        //Botão de apagar registros de endereço
+        {
+          text: 'Apagar',
+          onPress: () => {
+            onChange({latitude: null, longitude: null, address: ''});
+          },
+          style: 'cancel',
+        },
+        {text: 'Ok', onPress: () => console.log('OK Pressed')},
+      ]);
+    } else {
+      getPosition();
+    }
   };
 
   return (
     <View>
-      <TouchableOpacity style={styles.button} onPress={onButtonPres}>
+      <TouchableOpacity
+        style={[styles.button, address ? styles.buttonActived : '']}
+        onPress={onButtonPres}>
         <Icon name="person-pin" size={30} color={Colors.white} />
       </TouchableOpacity>
     </View>
@@ -77,6 +112,9 @@ const styles = StyleSheet.create({
     width: 59,
     height: 59,
     marginHorizontal: 3,
+  },
+  buttonActived: {
+    backgroundColor: Colors.blue,
   },
 });
 
