@@ -40,6 +40,7 @@ export const saveEntry = async (value, entry = {}) => {
         longitude: value.longitude || entry.longitude,
         entryAt: value.entryAt || entry.entryAt,
         description: value.category.name,
+        photo: value.photo,
         isInit: false,
         category: value.category || entry.category,
       };

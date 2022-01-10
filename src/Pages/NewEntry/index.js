@@ -6,6 +6,8 @@ import NewEntryCategoryPicker from './NewEntryCategoryPicker';
 import NewEntryDatePicker from './NewEntryDatePicker';
 import NewEntryDeleteAction from './NewEntryDeleteAction';
 import NewEntryAddressPicker from './NewEntryAddressPicker';
+import NewEntryCameraPicker from './NewEntryCameraPicker';
+
 import ActionFooter, {
   ActionPrimaryButton,
   ActionSecondaryButton,
@@ -24,6 +26,7 @@ const NewEntry = ({navigation}) => {
     address: null,
     category: {id: null, name: 'Selecione'},
     entryAt: new Date(),
+    photo: null,
   });
 
   const [, saveEntry, deleteEntry] = useEntries();
@@ -33,6 +36,7 @@ const NewEntry = ({navigation}) => {
   const [category, setCategory] = useState(entry.category);
   const [entryAt, setEntryAt] = useState(entry.entryAt);
   const [address, setAddress] = useState(entry.address);
+  const [photo, setPhoto] = useState(entry.photo);
   const [latitude, setLatitude] = useState(entry.latitude);
   const [longitude, setLongitude] = useState(entry.longitude);
 
@@ -51,6 +55,7 @@ const NewEntry = ({navigation}) => {
       longitude: longitude,
       category: category,
       entryAt: entryAt,
+      photo: photo,
     };
 
     console.log('NewEntry :: save ', data);
@@ -85,6 +90,7 @@ const NewEntry = ({navigation}) => {
 
         <View style={styles.formActionContainer}>
           <NewEntryDatePicker value={entryAt} onChange={setEntryAt} />
+          <NewEntryCameraPicker photo={photo} onChangePhoto={setPhoto} />
           <NewEntryAddressPicker
             address={address}
             onChange={({latitude, longitude, address}) => {
