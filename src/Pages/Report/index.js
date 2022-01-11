@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {LogBox} from 'react-native';
+import {LogBox, StatusBar} from 'react-native';
 
 import {
   StyleSheet,
@@ -58,6 +58,7 @@ const Report = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor={Colors.background} />
       <BalanceLabel />
       <View style={styles.filtersContainer}>
         <TouchableOpacity

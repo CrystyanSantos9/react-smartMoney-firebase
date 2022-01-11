@@ -34,14 +34,14 @@ export const saveEntry = async (value, entry = {}) => {
     realm.write(() => {
       data = {
         id: value.id || entry.id || getUUID(),
-        amount: value.amount || entry.amount,
+        amount: value.amount || entry.amount || 0,
         address: value.address || entry.address,
         latitude: value.latitude || entry.latitude,
         longitude: value.longitude || entry.longitude,
-        entryAt: value.entryAt || entry.entryAt,
+        entryAt: value.entryAt || entry.entryAt || new Date(),
         description: value.category.name,
         photo: value.photo,
-        isInit: false,
+        isInit: value.isInit || false,
         category: value.category || entry.category,
       };
       realm.create('Entry', data, true);
