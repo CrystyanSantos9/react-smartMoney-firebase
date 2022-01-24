@@ -1,5 +1,5 @@
+import firestore from '@react-native-firebase/firestore';
 import {getUUID} from './UUID';
-import {getRealm} from './Realm';
 
 export const getDefaultCategories = () => {
   return [
@@ -134,29 +134,36 @@ export const getDefaultCategories = () => {
 };
 
 export const getAllCategories = async () => {
-  const realm = await getRealm();
-  return realm.objects('Category').sorted('order');
+  // const realm = await getRealm();
+  // return realm.objects('Category').sorted('order');
 };
 
 export const getDebitCategories = async () => {
-  const realm = await getRealm();
-  return realm
-    .objects('Category')
-    .filtered('isDebit = true AND isInit = false')
-    .sorted('order');
+  // const realm = await getRealm();
+  // return realm
+  //   .objects('Category')
+  //   .filtered('isDebit = true AND isInit = false')
+  //   .sorted('order');
 };
 
 export const getCreditCategories = async () => {
-  const realm = await getRealm();
-  return realm
-    .objects('Category')
-    .filtered('isCredit = true AND isInit = false')
-    .sorted('order');
+  // const realm = await getRealm();
+  // return realm
+  //   .objects('Category')
+  //   .filtered('isCredit = true AND isInit = false')
+  //   .sorted('order');
 };
 
 export const getInitCategories = async () => {
-  const realm = await getRealm();
-  return realm.objects('Category').filtered('isInit = true').sorted('order')[
-    '0'
-  ];
+  // const realm = await getRealm();
+  // return realm.objects('Category').filtered('isInit = true').sorted('order')[
+  //   '0'
+  // ];
+
+  const querySnapshot = await firestore()
+    .collection('categories')
+    .where('isInit', '==', true)
+    .get();
+
+  return {...querySnapshot.docs[0].data(), id: querySnapshot.docs[0].id};
 };

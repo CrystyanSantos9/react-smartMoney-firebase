@@ -1,7 +1,7 @@
 import {getRealm} from './Realm';
 import {Alert} from 'react-native';
 
-import {getUUID} from './UUID';
+import firestore from '@react-native-firebase/firestore';
 
 import moment from '../vendors/moment';
 
@@ -26,29 +26,35 @@ export const getEntries = async (days, category) => {
   return entries;
 };
 
-export const saveEntry = async (value, entry = {}) => {
-  const realm = await getRealm();
+export const addEntry = async entry => {
   let data = {};
 
   try {
-    realm.write(() => {
-      data = {
-        id: value.id || entry.id || getUUID(),
-        amount: value.amount || entry.amount || 0,
-        address: value.address || entry.address,
-        latitude: value.latitude || entry.latitude,
-        longitude: value.longitude || entry.longitude,
-        entryAt: value.entryAt || entry.entryAt || new Date(),
-        description: value.category.name,
-        photo: value.photo,
-        isInit: value.isInit || false,
-        category: value.category || entry.category,
-      };
-      realm.create('Entry', data, true);
+    data = {
+      amount: entry.amount,
+      description: entry.category.name,
+      entryAt: entry.entryAt || new Date(),
+      latitude: entry.latitude,
+      longitude: entry.longitude,
+      address: entry.address,
+      photo: entry.photo,
+      isInit: entry.isInit || false,
+      category: entry.category,
+    };
+
+    firestore().settings({
+      ignoreUndefinedProperties: true,
     });
+    await firestore().collection('entries').add(data);
+
+    console.log('addEntry :: data: ', JSON.stringify(data));
   } catch (error) {
-    console.error('saveEntry :: error on save object: ', JSON.stringify(data));
-    Alert.alert('Erro ao salvar os dados de lançamento.');
+    console.error(
+      'addEntry :: error on save object: ',
+      JSON.stringify(data),
+      JSON.stringify(error),
+    );
+    Alert.alert('Error', 'Houve um erro ao salvar este lançamento.');
   }
 
   return data;

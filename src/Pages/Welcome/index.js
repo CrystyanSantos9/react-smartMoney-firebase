@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, StyleSheet, Image} from 'react-native';
 
 import ActionFooter, {
   ActionPrimaryButton,
 } from '../../components/Core/ActionFooter';
 
 import useCategories from '../../hooks/useCategories';
-import {saveEntry} from '../../services/Entries';
+import {addEntry} from '../../services/Entries';
 
 import Colors from '../../styles/Color';
 import Logo from '../../assets/logo-white.png';
@@ -16,12 +16,12 @@ import WelcomeBalanceInput from './WelcomeBalanceInput';
 import {setInitialized} from '../../services/Welcome';
 
 export default function Welcome({navigation}) {
-  const [value, setValue] = useState(0);
+  const [amount, setAmount] = useState(0);
   const [, , , initCategories] = useCategories();
 
   const onSavePress = async () => {
-    saveEntry({
-      amount: parseFloat(value),
+    addEntry({
+      amount: parseFloat(amount),
       isInit: true,
       category: initCategories,
     });
@@ -36,7 +36,7 @@ export default function Welcome({navigation}) {
         <Image source={Logo} />
       </View>
       <WelcomeMessage />
-      <WelcomeBalanceInput value={value} onChangeValue={setValue} />
+      <WelcomeBalanceInput value={amount} onChangeValue={setAmount} />
       <ActionFooter>
         <ActionPrimaryButton title="Continuar" onPress={onSavePress} />
       </ActionFooter>

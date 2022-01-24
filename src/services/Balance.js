@@ -1,5 +1,6 @@
 import {getRealm} from './Realm';
 import {getUUID} from './UUID';
+import firestore from '@react-native-firebase/firestore';
 
 import _ from 'lodash';
 import moment from '../vendors/moment';
@@ -7,18 +8,23 @@ import Colors from '../styles/Color';
 
 //recebe o valor de dias que serão considerados
 export const getBalance = async (untilDays = 0) => {
-  const realm = await getRealm();
-
-  let entries = realm.objects('Entry');
+  let querySnapshot;
 
   //se alguém passar um valor no campo de dias
   if (untilDays > 0) {
     const date = moment().subtract(untilDays, 'days').toDate();
-
-    entries = entries.filtered('entryAt < $0', date);
+    querySnapshot = await firestore()
+      .collection('entries')
+      .orderBy('entryAt')
+      .endBefore(date)
+      .get();
+  } else {
+    querySnapshot = await firestore().collection('entries').get();
   }
 
-  return entries.sum('amount');
+  return _(querySnapshot.docs).reduce((total, doc) => {
+    return total + doc.data().amount;
+  }, 0);
 };
 
 export const getBalanceSumByDate = async days => {

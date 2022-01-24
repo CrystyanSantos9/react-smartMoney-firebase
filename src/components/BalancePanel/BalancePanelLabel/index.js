@@ -1,12 +1,16 @@
 import React from 'react';
-import {View, Text, StyleSheet, ColorPropType} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
+import Currency from '../../Core/Currency';
+
 import Colors from '../../../styles/Color';
 
 const BalancePanelLabel = ({currentBalance}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>Saldo atual</Text>
-      <Text style={styles.value}>{currentBalance}</Text>
+      <Text style={styles.value}>
+        <Currency value={currentBalance} />
+      </Text>
     </View>
   );
 };
